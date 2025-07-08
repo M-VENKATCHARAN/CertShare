@@ -224,7 +224,7 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                 // className="bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-white"
               >
                 <div className="text-center space-y-4">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-black/20 rounded-full mb-4">
+                  {/* <div className="inline-flex items-center justify-center w-16 h-16 bg-black/20 rounded-full mb-4">
                     <Award className="h-8 w-8" />
                   </div>
                   <h1 className="text-3xl font-bold text-black">
@@ -232,11 +232,11 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                   </h1>
                   <p className="text-xl opacity-90 text-black">
                     This certifies that
-                  </p>
-                  <h2 className="text-4xl font-bold text-black">
+                  </p> */}
+                  <h2 className="text-xl font-bold text-black ml-[50px] mt-[165px]">
                     {certificate.recipientName}
                   </h2>
-                  <p className="text-xl opacity-90 text-black">
+                  {/* <p className="text-xl opacity-90 text-black">
                     has successfully completed
                   </p>
                   <h3 className="text-2xl font-semibold text-black">
@@ -254,20 +254,20 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                     <div className="text-center">
                       <p className="text-sm opacity-75">Certificate ID</p>
                       <p className="font-semibold">{certificate.id}</p>
-                    </div>
-                  </div>
+                    </div> */}
+                  {/* </div> */}
                 </div>
               </div>
             </Card>
 
             {/* Sharing Options */}
-            <Card className="mt-5">
-              <CardContent className="p-5">
-                <h3 className="text-lg font-semibold mb-4 flex items-center">
+            <Card className="mt-4">
+              <CardContent className="p-4">
+                <h3 className="text-lg font-semibold mb-2 flex items-center">
                   <Share2 className="h-5 w-5 mr-2" />
                   Share this certificate
                 </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-10 gap-1 mb-5">
+                <div className="grid grid-cols-2 sm:grid-cols-10 gap-1 mb-3">
                   <Button
                     variant="outline"
                     size="icon"
@@ -449,12 +449,14 @@ export default function CertificatePage({ params }: CertificatePageProps) {
             {certificate.courseName.toLowerCase().includes("email") && (
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-4 text">
-                    Loved learning {certificate.courseName}?
+                  <h3 className="text-lg font-bold mb-4 text">
+                    {/* Loved learning {certificate.courseName}? */}
+                    Level Up Your Email Game
                   </h3>
                   <p className="text-sm text-gray-700 mb-4">
-                    Explore our advanced courses on email infrastructure setup,
-                    email deliverbaility fundamentals.
+                    {/* Explore our advanced courses on email infrastructure setup,
+                    email deliverbaility fundamentals. */}
+                    Completed this? Master deliverability next.
                   </p>
                   <Button
                     onClick={() =>
@@ -462,7 +464,8 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                     }
                     className="bg-[#5a45fe] text-white"
                   >
-                    Explore Deliverability deep dive Course
+                    {/* Explore Deliverability deep dive Course */}
+                    Dive In
                   </Button>
                 </CardContent>
               </Card>
@@ -472,12 +475,14 @@ export default function CertificatePage({ params }: CertificatePageProps) {
               .includes("deliverability") && (
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="text-[1.05rem] font-bold mb-4">
-                    Loved learning {certificate.courseName}?
+                  <h3 className="text-lg font-bold mb-4">
+                    {/* Loved learning {certificate.courseName}? */}
+                    Go Beyond Deliverability
                   </h3>
                   <p className="text-sm text-gray-700 mb-4">
-                    Explore our advanced courses on email copywriting,email
-                    design,segmentation strategies,email deliverability
+                    {/* Explore our advanced courses on email copywriting,email
+                    design,segmentation strategies,email deliverability */}
+                    Master copy, design, and strategy too.
                   </p>
                   <Button
                     onClick={() =>
@@ -485,7 +490,8 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                     }
                     className="bg-[#5a45fe] text-white"
                   >
-                    Explore Email Masterclass Course
+                    {/* Explore Email Masterclass Course */}
+                    Join our Masterclass
                   </Button>
                 </CardContent>
               </Card>
