@@ -217,7 +217,7 @@ export default function CertificatePage({ params }: CertificatePageProps) {
           <div className="lg:col-span-2">
             <Card className="overflow-hidden">
               <div
-                className="p-8 text-white bg-contain bg-center bg-no-repeat h-[500px]" // className="p-8 text-white bg-cover bg-center bg-no-repeat"
+                className="p-8 text-white bg-contain bg-center bg-no-repeat h-[440px]" // className="p-8 text-white bg-cover bg-center bg-no-repeat"
                 style={{
                   backgroundImage: `url('${certificate.templateurl}')`,
                 }}
@@ -233,7 +233,7 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                   <p className="text-xl opacity-90 text-black">
                     This certifies that
                   </p> */}
-                  <h2 className="text-xl font-bold text-black ml-[50px] mt-[165px]">
+                  <h2 className="text-xl font-bold text-black ml-[40px] mt-[140px]">
                     {certificate.recipientName}
                   </h2>
                   {/* <p className="text-xl opacity-90 text-black">
@@ -346,8 +346,8 @@ export default function CertificatePage({ params }: CertificatePageProps) {
           <div className="space-y-6">
             {/* Certificate Info */}
             <Card>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-4 flex items-center">
+              <CardContent className="p-6 pt-4">
+                <h3 className="text-lg font-semibold mb-2 flex items-center">
                   <Shield className="h-5 w-5 mr-2" />
                   Certificate Details
                 </h3>
@@ -418,7 +418,7 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                       </div>
                     </div>
                   )} */}
-                  <h3 className="text-lg font-semibold mb-4 flex items-center">
+                  <h3 className="text-lg font-semibold mb-2 flex items-center">
                     <Shield className="h-5 w-5 mr-2 text-green-600" />
                     Verification
                   </h3>
@@ -432,8 +432,8 @@ export default function CertificatePage({ params }: CertificatePageProps) {
             {/* Skills Acquired */}
             {certificate.skills.length > 0 && (
               <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-4">
+                <CardContent className="p-6 pt-2 ">
+                  <h3 className="text-lg font-semibold mb-2">
                     Skills Acquired
                   </h3>
                   <div className="flex flex-wrap gap-2">
@@ -448,12 +448,12 @@ export default function CertificatePage({ params }: CertificatePageProps) {
             )}
             {certificate.courseName.toLowerCase().includes("email") && (
               <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-bold mb-4 text">
+                <CardContent className="p-6 pt-3">
+                  <h3 className="text-lg font-bold mb-3 text">
                     {/* Loved learning {certificate.courseName}? */}
                     Level Up Your Email Game
                   </h3>
-                  <p className="text-sm text-gray-700 mb-4">
+                  <p className="text-sm text-gray-700 mb-3">
                     {/* Explore our advanced courses on email infrastructure setup,
                     email deliverbaility fundamentals. */}
                     Completed this? Master deliverability next.
