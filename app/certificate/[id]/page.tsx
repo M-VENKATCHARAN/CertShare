@@ -40,7 +40,10 @@ export default function CertificatePage({ params }: CertificatePageProps) {
   const loadCertificate = async () => {
     try {
       setError(null);
-      const cert = await getCertificateById(params.id);
+      // const cert = await getCertificateById(params.id);
+      const certificateId = params.id.split("-").pop(); // get the last part
+      const cert = await getCertificateById(certificateId || "");
+
       if (cert) {
         setCertificate(cert);
       } else {
@@ -66,7 +69,11 @@ export default function CertificatePage({ params }: CertificatePageProps) {
   const handleShare = (platform: string) => {
     if (!certificate) return;
 
-    const url = `${window.location.origin}/certificate/${certificate.id}`;
+    const url = `${
+      window.location.origin
+    }/certificate/${certificate.recipientName
+      .toLowerCase()
+      .replace(/\s+/g, "-")}-${certificate.id}`;
     const text = `I just completed ${certificate.courseName} at ${certificate.issuerName}! 🎓`;
 
     switch (platform) {
@@ -108,7 +115,11 @@ export default function CertificatePage({ params }: CertificatePageProps) {
     if (!certificate) return;
 
     try {
-      const url = `${window.location.origin}/certificate/${certificate.id}`;
+      const url = `${
+        window.location.origin
+      }/certificate/${certificate.recipientName
+        .toLowerCase()
+        .replace(/\s+/g, "-")}-${certificate.id}`;
       await navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -233,7 +244,7 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                   <p className="text-xl opacity-90 text-black">
                     This certifies that
                   </p> */}
-                  <h2 className="text-xl font-bold text-black ml-[25px] mt-[140px]">
+                  <h2 className="text-xl font-bold text-black ml-[20px] mt-[140px]">
                     {certificate.recipientName}
                   </h2>
                   {/* <p className="text-xl opacity-90 text-black">
@@ -327,7 +338,11 @@ export default function CertificatePage({ params }: CertificatePageProps) {
 
                 <div className="flex items-center space-x-2">
                   <div className="flex-1 p-2 bg-gray-50 rounded border text-sm text-gray-600">
-                    {`${window.location.origin}/certificate/${certificate.id}`}
+                    {`${
+                      window.location.origin
+                    }/certificate/${certificate.recipientName
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}-${certificate.id}`}
                   </div>
                   <Button
                     variant="outline"
