@@ -227,8 +227,8 @@ export default function CertificatePage({ params }: CertificatePageProps) {
           {/* Certificate Display */}
           <div className="lg:col-span-2">
             <Card className="overflow-hidden">
-              <div
-                className="p-8 text-white bg-contain bg-center bg-no-repeat h-[440px]" // className="p-8 text-white bg-cover bg-center bg-no-repeat"
+              {/* <div
+                className="p-8 text-white bg-contain bg-center bg-no-repeat  sm:h-[440px]" // className="p-8 text-white bg-cover bg-center bg-no-repeat"
                 style={{
                   backgroundImage: `url('${certificate.templateurl}')`,
                 }}
@@ -244,29 +244,24 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                   <p className="text-xl opacity-90 text-black">
                     This certifies that
                   </p> */}
-                  <h2 className="text-xl font-bold text-black ml-[20px] mt-[140px]">
+              {/* <h2 className="text-xl font-bold text-black ml-[20px] mt-[140px]">
+                    {certificate.recipientName}
+                  </h2> */}
+              {/* <h2 className="sm:text-xl   font-bold text-black ml-[40px] mt-[150px] sm:ml-[20px] sm:mt-[140px]">
                     {certificate.recipientName}
                   </h2>
-                  {/* <p className="text-xl opacity-90 text-black">
-                    has successfully completed
-                  </p>
-                  <h3 className="text-2xl font-semibold text-black">
-                    {certificate.courseName}
-                  </h3>
-                  <div className="flex items-center justify-center space-x-8 mt-8">
-                    <div className="text-center">
-                      <p className="text-sm opacity-75">Issued by</p>
-                      <p className="font-semibold">{certificate.issuerName}</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-sm opacity-75">Date</p>
-                      <p className="font-semibold">{certificate.issueDate}</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-sm opacity-75">Certificate ID</p>
-                      <p className="font-semibold">{certificate.id}</p>
-                    </div> */}
-                  {/* </div> */}
+                </div>
+              </div> */}
+              <div
+                className="h-[260px] sm:h-[440px] bg-contain bg-center bg-no-repeat relative flex items-start justify-start sm:items-start sm:justify-start"
+                style={{
+                  backgroundImage: `url('${certificate.templateurl}')`,
+                }}
+              >
+                <div className="ml-[135px] mt-[100px] sm:ml-[335px] sm:mt-[175px]">
+                  <h2 className="text-sm sm:text-xl font-bold text-black">
+                    {certificate.recipientName}
+                  </h2>
                 </div>
               </div>
             </Card>
@@ -336,7 +331,7 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-2">
+                {/* <div className="flex items-center space-x-2">
                   <div className="flex-1 p-2 bg-gray-50 rounded border text-sm text-gray-600">
                     {`${
                       window.location.origin
@@ -348,6 +343,38 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                     variant="outline"
                     onClick={copyToClipboard}
                     className="flex items-center space-x-1 bg-transparent"
+                  >
+                    <Link2 className="h-4 w-4" />
+                    <span>{copied ? "Copied!" : "Copy"}</span>
+                  </Button>
+                </div> */}
+                {/* <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+  <div className="flex-1 p-2 bg-gray-50 rounded border text-sm text-gray-600 overflow-x-auto">
+    {`${window.location.origin}/certificate/${certificate.recipientName
+      .toLowerCase()
+      .replace(/\s+/g, "-")}-${certificate.id}`}
+  </div>
+  <Button
+    variant="outline"
+    onClick={copyToClipboard}
+    className="flex items-center space-x-1 bg-transparent self-start sm:self-auto"
+  >
+    <Link2 className="h-4 w-4" />
+    <span>{copied ? "Copied!" : "Copy"}</span>
+  </Button>
+</div> */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                  <div className="flex-1 p-2 bg-gray-50 rounded border text-sm text-gray-600 overflow-x-auto">
+                    {`${
+                      window.location.origin
+                    }/certificate/${certificate.recipientName
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}-${certificate.id}`}
+                  </div>
+                  <Button
+                    variant="outline"
+                    onClick={copyToClipboard}
+                    className="flex items-center justify-center space-x-1 bg-transparent w-full sm:w-auto"
                   >
                     <Link2 className="h-4 w-4" />
                     <span>{copied ? "Copied!" : "Copy"}</span>
@@ -407,32 +434,6 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                       </div>
                     </div>
                   )}
-                  {/* {certificate.grade && (
-                    <div className="flex items-start space-x-3">
-                      <CheckCircle className="h-5 w-5 text-gray-400 mt-0.5" />
-                      <div>
-                        <p className="text-sm font-medium text-gray-900">
-                          Final Grade
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          {certificate.grade}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                  {certificate.instructorName && (
-                    <div className="flex items-start space-x-3">
-                      <User className="h-5 w-5 text-gray-400 mt-0.5" />
-                      <div>
-                        <p className="text-sm font-medium text-gray-900">
-                          Instructor
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          {certificate.instructorName}
-                        </p>
-                      </div>
-                    </div>
-                  )} */}
                   <h3 className="text-lg font-semibold mb-2 flex items-center">
                     <Shield className="h-5 w-5 mr-2 text-green-600" />
                     Verification
@@ -511,69 +512,6 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                 </CardContent>
               </Card>
             )}
-
-            {/* Verification */}
-            {/* <Card>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-4 flex items-center">
-                  <Shield className="h-5 w-5 mr-2 text-green-600" />
-                  Verification
-                </h3>
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-600" />
-                    <span className="text-sm text-gray-600">
-                      Data from Google Sheets
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-600" />
-                    <span className="text-sm text-gray-600">
-                      Real-time verification
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-600" />
-                    <span className="text-sm text-gray-600">
-                      Issuer authenticated
-                    </span>
-                  </div>
-                </div>
-                <Separator className="my-4" />
-                <div className="space-y-1">
-                  <p className="text-xs text-gray-500">
-                    Certificate ID: {certificate.id}
-                  </p>
-                  {certificate.verificationCode && (
-                    <p className="text-xs text-gray-500">
-                      Verification: {certificate.verificationCode}
-                    </p>
-                  )}
-                </div>
-              </CardContent>
-            </Card> */}
-            {/* Download Options
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-4">Download</h3>
-                <div className="space-y-2">
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start bg-transparent"
-                  >
-                    <Download className="h-4 w-4 mr-2" />
-                    Download PDF
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start bg-transparent"
-                  >
-                    <Download className="h-4 w-4 mr-2" />
-                    Download PNG
-                  </Button>
-                </div>
-              </CardContent>
-            </Card> */}
           </div>
         </div>
       </div>

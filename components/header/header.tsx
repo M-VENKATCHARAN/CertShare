@@ -177,13 +177,29 @@ export const Header = () => {
   const isHome = pathname === "/";
 
   return (
-    <div className="flex justify-between items-center p-4 border-b border-gray-200">
-      <Link href="/" prefetch={false} style={{ marginLeft: "200px" }}>
-        <Image src="/logo-full.svg" alt="header-logo" width={198} height={36} />
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+      {/* Logo */}
+      <Link href="/" prefetch={false}>
+        <Image
+          src="/logo-full.svg"
+          alt="header-logo"
+          width={198}
+          height={36}
+          priority
+        />
       </Link>
-      <div style={{ paddingRight: "200px" }}>
-        <ul className="flex gap-4 items-center  ">
-          {/* Login */}
+      {/* <div className="flex justify-between items-center p-4 border-b border-gray-200">
+        <Link href="/" prefetch={false} style={{ marginLeft: "200px" }}>
+          <Image
+            src="/logo-full.svg"
+            alt="header-logo"
+            width={198}
+            height={36}
+          />
+        </Link> */}
+
+      {/* <ul className="flex gap-4 items-center  ">
+          {/* Login 
           <li className="flex items-center p-0 ">
             <Link
               href={
@@ -220,7 +236,7 @@ export const Header = () => {
               </button>
             </Link>
           </li>
-          {/* Signup */}
+          {/* Signup 
           <li className="flex items-center p-0">
             <Link
               href={addUTMParameters(
@@ -264,8 +280,56 @@ export const Header = () => {
               </button>
             </Link>
           </li>
-        </ul>
-      </div>
+        </ul> */}
+      <ul className="hidden min-[800px]:flex items-center gap-4">
+        {/* Login */}
+        <li>
+          <Link
+            href={
+              isHome && isDesktop && isAnimating
+                ? addUTMParameters(
+                    secondaryButtonLink,
+                    "nav-2",
+                    currentURL,
+                    !!homepageVariant,
+                    homepageVariant
+                  )
+                : `https://manage.mailmodo.com/auth/login?utm_content=login&utm_term=${currentURL}`
+            }
+            prefetch={false}
+          >
+            <button className="flex items-center gap-2 text-sm">
+              <Image
+                src="https://res.cloudinary.com/mailmodo/image/upload/v1667737265/strapi/user_icon_3_3c06e6106e.png"
+                alt="user icon"
+                width={14}
+                height={14}
+              />
+              <span>
+                {isHome && isDesktop && isAnimating ? "Book a Demo" : "Login"}
+              </span>
+            </button>
+          </Link>
+        </li>
+
+        {/* Signup */}
+        <li>
+          <Link
+            href={addUTMParameters(
+              primaryButtonLink,
+              isHome && isDesktop && isAnimating ? "nav-2" : "nav",
+              currentURL,
+              !!homepageVariant,
+              homepageVariant
+            )}
+            prefetch={false}
+          >
+            <button className="bg-[#5a45fe] text-white rounded px-4 py-2 text-sm">
+              Get started - <span className="hidden md:inline">it's free</span>
+            </button>
+          </Link>
+        </li>
+      </ul>
     </div>
   );
 };
