@@ -233,7 +233,7 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                   <p className="text-xl opacity-90 text-black">
                     This certifies that
                   </p> */}
-                  <h2 className="text-xl font-bold text-black ml-[30px] mt-[140px]">
+                  <h2 className="text-xl font-bold text-black ml-[25px] mt-[140px]">
                     {certificate.recipientName}
                   </h2>
                   {/* <p className="text-xl opacity-90 text-black">
