@@ -9,6 +9,20 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-}
+  async redirects() {
+    return [
+      {
+        source: "/:course/certificate/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/:course/",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
+};
 
-export default nextConfig
+export default nextConfig;

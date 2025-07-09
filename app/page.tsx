@@ -79,7 +79,7 @@ export default function HomePage() {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Award className="h-12 w-12 text-blue-600" />
+            <Award className="h-12 w-12 text-[#5a45fe]" />
             <h1 className="text-4xl font-bold text-gray-900">
               Mailmodo Achievers
             </h1>
@@ -87,10 +87,10 @@ export default function HomePage() {
           <p className="text-xl text-gray-600 mb-4">
             Get your certificates & show off your skills
           </p>
-          <Badge variant="outline" className="text-sm">
+          {/* <Badge variant="outline" className="text-sm">
             <FileSpreadsheet className="h-4 w-4 mr-1" />
             Real-time issuance of certificates
-          </Badge>
+          </Badge> */}
         </div>
         {/* Search and Certificates */}
         {sheetStatus?.isValid && (
@@ -127,7 +127,7 @@ export default function HomePage() {
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <CardTitle className="text-lg line-clamp-2">
-                          {cert.courseName}
+                          {cert.recipientName}
                         </CardTitle>
                         <CardDescription className="mt-1">
                           {cert.issuerName}
@@ -144,7 +144,7 @@ export default function HomePage() {
                   <CardContent className="space-y-4">
                     <div>
                       <p className="font-medium text-gray-900">
-                        {cert.recipientName}
+                        {cert.courseName}
                       </p>
                       <p className="text-sm text-gray-600">
                         Completed: {cert.completionDate}
@@ -177,10 +177,20 @@ export default function HomePage() {
 
                     <Button asChild className="w-full">
                       <Link
-                        href={`/certificate/${cert.recipientName
+                        href={`${cert.courseName
+                          .toLowerCase()
+                          .replace(
+                            /\s+/g,
+                            "-"
+                          )}/certificate/${cert.recipientName
                           .toLowerCase()
                           .replace(/\s+/g, "-")}-${cert.id}`}
                       >
+                        {/* <Link
+                        href={`/certificate/${cert.recipientName
+                          .toLowerCase()
+                          .replace(/\s+/g, "-")}-${cert.id}`}
+                      > */}
                         {/* 
                       <Link href={`/certificate/${cert.id}`}> */}
                         View Certificate
@@ -218,129 +228,6 @@ export default function HomePage() {
         )}
 
         {/* Google Sheets Status */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              {/* <span className="flex items-center gap-2">
-                <FileSpreadsheet className="h-5 w-5" />
-                Google Sheets Integration
-              </span> */}
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={loadData}
-                disabled={loading}
-                className="bg-transparent"
-              >
-                {loading ? (
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-600"></div>
-                ) : (
-                  <RefreshCw className="h-4 w-4" />
-                )}
-              </Button>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {loading ? (
-              <div className="flex items-center space-x-2">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
-                <span className="text-gray-600">
-                  Connecting to Google Sheets...
-                </span>
-              </div>
-            ) : sheetStatus?.isValid ? (
-              <div className="space-y-3">
-                {/* <div className="flex items-center space-x-2 text-green-600">
-                  <CheckCircle className="h-5 w-5" />
-                  <span className="font-medium">
-                    Successfully connected to Google Sheets
-                  </span>
-                </div> */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                  <div className="flex items-center space-x-2">
-                    <Users className="h-4 w-4 text-blue-600" />
-                    <span>{certificates.length} certificates loaded</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Shield className="h-4 w-4 text-green-600" />
-                    <span>Real-time verification</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RefreshCw className="h-4 w-4 text-gray-600" />
-                    <span>Auto-refresh every 5 minutes</span>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                <div className="flex items-center space-x-2 text-red-600">
-                  <AlertCircle className="h-5 w-5" />
-                  <span className="font-medium">
-                    Google Sheets connection failed
-                  </span>
-                </div>
-                <p className="text-sm text-gray-600">{sheetStatus?.error}</p>
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                  <h4 className="font-medium text-yellow-800 mb-2">
-                    Setup Instructions:
-                  </h4>
-                  <ol className="text-sm text-yellow-700 space-y-1 list-decimal list-inside">
-                    <li>Create a Google Sheet with the required columns</li>
-                    <li>Make the sheet publicly viewable</li>
-                    <li>Get a Google Sheets API key</li>
-                    <li>
-                      Set environment variables: NEXT_PUBLIC_GOOGLE_SHEET_ID and
-                      NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY
-                    </li>
-                  </ol>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-        {/* How It Works */}
-        <Card>
-          <CardHeader>
-            <CardTitle>How It Works</CardTitle>
-            <CardDescription>
-              Simple certificate management with Google Sheets
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
-                  <span className="text-blue-600 font-bold">1</span>
-                </div>
-                <h3 className="font-semibold mb-2">Create Google Sheet</h3>
-                <p className="text-sm text-gray-600">
-                  Set up your certificate data in a Google Sheet with the
-                  required columns
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
-                  <span className="text-blue-600 font-bold">2</span>
-                </div>
-                <h3 className="font-semibold mb-2">Auto-Generate Pages</h3>
-                <p className="text-sm text-gray-600">
-                  Certificate pages are automatically created from your sheet
-                  data
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
-                  <span className="text-blue-600 font-bold">3</span>
-                </div>
-                <h3 className="font-semibold mb-2">Share & Verify</h3>
-                <p className="text-sm text-gray-600">
-                  Recipients get unique URLs to share their certificates with
-                  real-time verification
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );

@@ -1,52 +1,10 @@
-// import type React from "react";
-// import type { Metadata } from "next";
-// import Link from "next/link";
-// import { useRouter } from "next/router";
-// import { Inter } from "next/font/google";
-// import Image from "next/image";
-
-// export const Footer = () => {
-//   return (
-//     <div>
-//       <div className="flex mb-6">
-//         <Image
-//           src={"./logo-full.svg"}
-//           alt="maidmodo logo"
-//           width={198}
-//           height={36}
-//           //className="footer-logo"
-//         />
-//       </div>
-//       {/* <address className={styles.company_address} data-dark-theme={isDarkPage}>
-//         <p style={{ fontWeight: "600", marginBottom: "5px" }}>
-//           Registered Address (US)
-//         </p>
-//         <p>
-//           Mailmodo Technologies Inc
-//           <br />
-//           1160 Battery St.
-//           <br />
-//           East Building, Suite 100
-//           <br />
-//           San Francisco, CA 94111
-//           {/* 355 Bryant Street, Unit 403
-//                 <br />
-//                 San Francisco, CA 94107
-//                 <br /> USA */}
-//       {/* </p> */}
-//       {/* <a className="d-block" href="tel:+12626002002">
-//                     +1 262 600 2002
-//                   </a> */}
-//       {/* //   </address> */}
-//     </div>
-//   );
-// };
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, Fragment } from "react";
+import LogoFull from "@/public/logo-full.svg"; // You may need SVGR setup for this
 
 /* ───────── helpers & constants ────────── */
 
@@ -102,7 +60,7 @@ export const Footer = () => {
           <div className="lg:w-3/12">
             <div className="mb-6">
               <Image
-                src="/logo-full.svg"
+                src={LogoFull}
                 width={198}
                 height={36}
                 alt="Mailmodo logo"
@@ -196,21 +154,24 @@ export const Footer = () => {
               {/* — HOME — */}
               <div>
                 <h3 className={`mb-4 font-semibold ${linkClass}`}>
-                  <Link href="/">Home</Link>
+                  <Link href="https://www.mailmodo.com/">Home</Link>
                 </h3>
                 <ul className="space-y-2 text-sm">
                   {HOME.map((item) => (
                     <Fragment key={item.link}>
                       {item.isOnlyAnchorTag ? (
                         <li>
-                          <a href={item.link} className={linkClass}>
+                          <a
+                            href={`https://www.mailmodo.com/${item.link}`}
+                            className={linkClass}
+                          >
                             {item.name}
                           </a>
                         </li>
                       ) : (
                         <li>
                           <Link
-                            href={item.link}
+                            href={`https://www.mailmodo.com/${item.link}`}
                             target={item.target ? "_blank" : undefined}
                             className={linkClass}
                           >
@@ -226,12 +187,15 @@ export const Footer = () => {
               {/* — PRODUCT — */}
               <div>
                 <h4 className={`mb-4 font-semibold ${linkClass}`}>
-                  <Link href="/features/">Product</Link>
+                  <Link href="https://www.mailmodo.com/features/">Product</Link>
                 </h4>
                 <ul className="space-y-2 text-sm">
                   {PRODUCTS.map((item) => (
                     <li key={item.link}>
-                      <Link href={item.link} className={linkClass}>
+                      <Link
+                        href={`https://www.mailmodo.com/${item.link}`}
+                        className={linkClass}
+                      >
                         {item.name}
                       </Link>
                     </li>
@@ -242,12 +206,17 @@ export const Footer = () => {
               {/* — RESOURCES — */}
               <div>
                 <h4 className={`mb-4 font-semibold ${linkClass}`}>
-                  <Link href="/resources/">Resources</Link>
+                  <Link href="https://www.mailmodo.com/resources/">
+                    Resources
+                  </Link>
                 </h4>
                 <ul className="space-y-2 text-sm">
                   {RESOURCES.map((item) => (
                     <li key={item.link}>
-                      <Link href={item.link} className={linkClass}>
+                      <Link
+                        href={`https://www.mailmodo.com/${item.link}`}
+                        className={linkClass}
+                      >
                         {item.name}
                       </Link>
                     </li>
@@ -258,13 +227,16 @@ export const Footer = () => {
               {/* — HOW WE COMPARE — */}
               <div>
                 <h4 className={`mb-4 font-semibold ${linkClass}`}>
-                  <Link href="/comparison/">How We Compare</Link>
+                  <Link href="https://www.mailmodo.com/comparison/">
+                    How We Compare
+                  </Link>
                 </h4>
                 <ul className="space-y-2 text-sm">
                   {HOW_WE_COMPARE.map((item) => (
                     <li key={item.link}>
                       <Link
-                        href={`/comparison${item.link}`}
+                        href={`https://www.mailmodo.com/comparison${item.link}`}
+                        // href={`/comparison${item.link}`}
                         className={linkClass}
                       >
                         {item.name}

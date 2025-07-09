@@ -69,11 +69,12 @@ export default function CertificatePage({ params }: CertificatePageProps) {
   const handleShare = (platform: string) => {
     if (!certificate) return;
 
-    const url = `${
-      window.location.origin
-    }/certificate/${certificate.recipientName
+    const url = `${window.location.origin}/${certificate.courseName
+      .toLowerCase()
+      .replace(/\s+/g, "-")}/certificate/${certificate.recipientName
       .toLowerCase()
       .replace(/\s+/g, "-")}-${certificate.id}`;
+
     const text = `I just completed ${certificate.courseName} at ${certificate.issuerName}! 🎓`;
 
     switch (platform) {
@@ -115,9 +116,9 @@ export default function CertificatePage({ params }: CertificatePageProps) {
     if (!certificate) return;
 
     try {
-      const url = `${
-        window.location.origin
-      }/certificate/${certificate.recipientName
+      const url = `${window.location.origin}/${certificate.courseName
+        .toLowerCase()
+        .replace(/\s+/g, "-")}/certificate/${certificate.recipientName
         .toLowerCase()
         .replace(/\s+/g, "-")}-${certificate.id}`;
       await navigator.clipboard.writeText(url);
@@ -235,12 +236,6 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                 // className="bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-white"
               >
                 <div className="text-center space-y-4">
-                  {/* <div className="inline-flex items-center justify-center w-16 h-16 bg-black/20 rounded-full mb-4">
-                    <Award className="h-8 w-8" />
-                  </div>
-                  <h1 className="text-3xl font-bold text-black">
-                    Certificate of Completion
-                  </h1>
                   <p className="text-xl opacity-90 text-black">
                     This certifies that
                   </p> */}
@@ -265,6 +260,18 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                 </div>
               </div>
             </Card>
+            {/* <div className=" h-[160px] sm:h-[440px]">
+              <img
+                src={certificate.templateurl}
+                className=" top-1 h-[250px] ml:[50px] mb-[10px] sm:h-[440px] w-[80%] sm:mt-[25px] sm:ml-[80px]"
+                alt="Certificate Template"
+              />
+              <div className=" z-20 ml-[135px] mt-[100px] sm:ml-[335px] sm:mt-[50px]">
+                <h2 className="text-sm sm:text-xl font-bold text-black">
+                  {certificate.recipientName}
+                </h2>
+              </div>
+            </div> */}
 
             {/* Sharing Options */}
             <Card className="mt-4">
@@ -331,43 +338,14 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                   </div>
                 </div>
 
-                {/* <div className="flex items-center space-x-2">
-                  <div className="flex-1 p-2 bg-gray-50 rounded border text-sm text-gray-600">
-                    {`${
-                      window.location.origin
-                    }/certificate/${certificate.recipientName
-                      .toLowerCase()
-                      .replace(/\s+/g, "-")}-${certificate.id}`}
-                  </div>
-                  <Button
-                    variant="outline"
-                    onClick={copyToClipboard}
-                    className="flex items-center space-x-1 bg-transparent"
-                  >
-                    <Link2 className="h-4 w-4" />
-                    <span>{copied ? "Copied!" : "Copy"}</span>
-                  </Button>
-                </div> */}
-                {/* <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-  <div className="flex-1 p-2 bg-gray-50 rounded border text-sm text-gray-600 overflow-x-auto">
-    {`${window.location.origin}/certificate/${certificate.recipientName
-      .toLowerCase()
-      .replace(/\s+/g, "-")}-${certificate.id}`}
-  </div>
-  <Button
-    variant="outline"
-    onClick={copyToClipboard}
-    className="flex items-center space-x-1 bg-transparent self-start sm:self-auto"
-  >
-    <Link2 className="h-4 w-4" />
-    <span>{copied ? "Copied!" : "Copy"}</span>
-  </Button>
-</div> */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                   <div className="flex-1 p-2 bg-gray-50 rounded border text-sm text-gray-600 overflow-x-auto">
-                    {`${
-                      window.location.origin
-                    }/certificate/${certificate.recipientName
+                    {`${window.location.origin}/${certificate.courseName
+                      .toLowerCase()
+                      .replace(
+                        /\s+/g,
+                        "-"
+                      )}/certificate/${certificate.recipientName
                       .toLowerCase()
                       .replace(/\s+/g, "-")}-${certificate.id}`}
                   </div>
@@ -476,7 +454,8 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                   </p>
                   <Button
                     onClick={() =>
-                      (window.location.href = "/courses/email-advanced")
+                      (window.location.href =
+                        "https://mailmodo.com/courses/email-deliverability-course/")
                     }
                     className="bg-[#5a45fe] text-white"
                   >
@@ -502,7 +481,8 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                   </p>
                   <Button
                     onClick={() =>
-                      (window.location.href = "/courses/email-advanced")
+                      (window.location.href =
+                        "https://mailmodo.com/courses/email-marketing-certification/")
                     }
                     className="bg-[#5a45fe] text-white"
                   >
