@@ -1,19 +1,22 @@
-import type { Certificate, CertificateTemplate } from "@/types/certificate"
+import type { Certificate, CertificateTemplate } from "@/types/certificate";
 
 function generateCertificateId() {
-  return `CERT-${Date.now()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`
+  return `CERT-${Date.now()}-${Math.random()
+    .toString(36)
+    .substr(2, 6)
+    .toUpperCase()}`;
 }
 
 function generateVerificationCode() {
-  return `VER-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
+  return `VER-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
 }
 
 function createCertificate(
   recipient: { name: string; email: string; grade: string },
-  template: CertificateTemplate,
+  template: CertificateTemplate
 ): Certificate {
-  const now = new Date()
-  const completionDate = new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000) // 5 days ago
+  const now = new Date();
+  const completionDate = new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000); // 5 days ago
 
   return {
     id: generateCertificateId(),
@@ -32,19 +35,19 @@ function createCertificate(
       day: "numeric",
     }),
     duration: template.duration,
+    certificateUrl: template.certificateUrl,
     grade: recipient.grade,
     skills: template.skills,
     instructorName: template.instructorName,
-    verificationCode: generateVerificationCode(),
     isVerified: true,
     createdAt: now.toISOString(),
     updatedAt: now.toISOString(),
-  }
+  };
 }
 
 export async function generateCertificatesFromTemplate(
   template: CertificateTemplate,
-  recipients: { name: string; email: string; grade: string }[],
+  recipients: { name: string; email: string; grade: string }[]
 ): Promise<Certificate[]> {
-  return recipients.map((recipient) => createCertificate(recipient, template))
+  return recipients.map((recipient) => createCertificate(recipient, template));
 }

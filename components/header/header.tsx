@@ -14,7 +14,7 @@ export const Header = () => {
   const isDarkPage = false;
   const homepageVariant = "";
   const currentURL = "/";
-  const primaryButtonLink = "/signup";
+  const primaryButtonLink = "https://manage.mailmodo.com/auth/signup";
   const secondaryButtonLink = "/login";
 
   const addUTMParameters = (
@@ -34,19 +34,27 @@ export const Header = () => {
   const isHome = pathname === "/";
 
   return (
-    <div className=" px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center bg-[#ebf2ff]">
+    <div className="px-1 sm:px-6 lg:px-8 py-3 flex justify-between items-center bg-[#ebf2ff]">
       {/* Logo max-w-7xl mx-auto*/}
       <Link
         href="https://www.mailmodo.com/"
         prefetch={false}
-        className="ml-[100px] mt-[10px]"
+        className="ml-[20px] sm:ml-[100px] sm:mt-[10px]"
       >
+        <Image
+          src={LogoFull}
+          alt="header-logo"
+          width={120}
+          height={28}
+          priority
+          className="block sm:hidden"
+        />
         <Image
           src={LogoFull}
           alt="header-logo"
           width={198}
           height={36}
-          priority
+          className="hidden sm:block"
         />
       </Link>
       {/* <div className="flex justify-between items-center p-4 border-b border-gray-200">

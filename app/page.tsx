@@ -42,12 +42,26 @@ export default function HomePage() {
     try {
       // Validate sheet setup
       const validation = await validateSheetSetup();
+      console.log("Sheet status:", validation);
       setSheetStatus(validation);
 
       // Load certificates if validation passes
       if (validation.isValid) {
         const certs = await getAllCertificates();
-        setCertificates(certs);
+
+        // Sort by completionDate in MM/DD/YYYY format (most recent first)
+        const sortedCerts = certs.sort((a, b) => {
+          const parseDate = (dateStr: string) => {
+            const [month, day, year] = dateStr.split("/").map(Number);
+            return new Date(year, month - 1, day).getTime();
+          };
+
+          const dateA = parseDate(a.completionDate);
+          const dateB = parseDate(b.completionDate);
+          return dateB - dateA;
+        });
+
+        setCertificates(sortedCerts);
       }
     } catch (error) {
       console.error("Error loading data:", error);

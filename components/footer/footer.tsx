@@ -162,7 +162,11 @@ export const Footer = () => {
                       {item.isOnlyAnchorTag ? (
                         <li>
                           <a
-                            href={`https://www.mailmodo.com/${item.link}`}
+                            href={
+                              item.link.startsWith("http")
+                                ? item.link
+                                : `https://www.mailmodo.com${item.link}`
+                            }
                             className={linkClass}
                           >
                             {item.name}
@@ -171,7 +175,11 @@ export const Footer = () => {
                       ) : (
                         <li>
                           <Link
-                            href={`https://www.mailmodo.com/${item.link}`}
+                            href={
+                              item.link.startsWith("http")
+                                ? item.link
+                                : `https://www.mailmodo.com${item.link}`
+                            }
                             target={item.target ? "_blank" : undefined}
                             className={linkClass}
                           >
@@ -193,7 +201,7 @@ export const Footer = () => {
                   {PRODUCTS.map((item) => (
                     <li key={item.link}>
                       <Link
-                        href={`https://www.mailmodo.com/${item.link}`}
+                        href={`https://www.mailmodo.com${item.link}`}
                         className={linkClass}
                       >
                         {item.name}
@@ -214,7 +222,7 @@ export const Footer = () => {
                   {RESOURCES.map((item) => (
                     <li key={item.link}>
                       <Link
-                        href={`https://www.mailmodo.com/${item.link}`}
+                        href={`https://www.mailmodo.com${item.link}`}
                         className={linkClass}
                       >
                         {item.name}

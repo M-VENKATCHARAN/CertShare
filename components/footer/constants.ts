@@ -30,7 +30,7 @@ export const HOME = [
   },
   {
     name: "Book a Demo",
-    link: "https://www.mailmodo.com/demo/",
+    link: "/demo/",
     isOnlyAnchorTag: true,
   },
   {

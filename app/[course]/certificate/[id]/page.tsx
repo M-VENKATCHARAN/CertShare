@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
 import {
   Share2,
   Download,
@@ -186,6 +187,43 @@ export default function CertificatePage({ params }: CertificatePageProps) {
       </div>
     );
   }
+  const handleDownloadPDF = async () => {
+    const pdfUrl = certificate?.certificateUrl;
+    if (!pdfUrl) return;
+
+    try {
+      const response = await fetch(pdfUrl);
+      const blob = await response.blob();
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "certificate.pdf";
+      link.click();
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Failed to download PDF:", error);
+    }
+  };
+
+  const handleDownloadPNG = async () => {
+    const imageUrl = certificate?.certificateUrl;
+    if (!imageUrl) return;
+
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "certificate.png";
+      link.click();
+      URL.revokeObjectURL(url); // clean up
+    } catch (error) {
+      console.error("Failed to download image:", error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -248,16 +286,23 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                 </div>
               </div> */}
               <div
-                className="h-[260px] sm:h-[440px] bg-contain bg-center bg-no-repeat relative flex items-start justify-start sm:items-start sm:justify-start"
-                style={{
-                  backgroundImage: `url('${certificate.templateurl}')`,
-                }}
+                className="flex justify-center items-center"
+                // className="h-[260px] sm:h-[440px] bg-contain bg-center bg-no-repeat relative flex items-start justify-start sm:items-start sm:justify-start"
+                // style={{
+                //   backgroundImage: `url('${certificate.certificateUrl}')`,
+                // }}
               >
-                <div className="ml-[135px] mt-[100px] sm:ml-[335px] sm:mt-[175px]">
+                {/* <div className="ml-[135px] mt-[100px] sm:ml-[335px] sm:mt-[175px]">
                   <h2 className="text-sm sm:text-xl font-bold text-black">
                     {certificate.recipientName}
                   </h2>
-                </div>
+                </div> */}
+                <Image
+                  src={certificate.certificateUrl}
+                  alt="Certificate"
+                  height={100}
+                  width={620}
+                />
               </div>
             </Card>
             {/* <div className=" h-[160px] sm:h-[440px]">
@@ -323,6 +368,7 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                       variant="outline"
                       size="sm"
                       className="flex items-center gap-2"
+                      onClick={handleDownloadPDF}
                     >
                       <Download className="h-4 w-4" />
                       Download PDF
@@ -331,13 +377,13 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                       variant="outline"
                       size="sm"
                       className="flex items-center gap-2"
+                      onClick={handleDownloadPNG}
                     >
                       <Download className="h-4 w-4" />
                       Download PNG
                     </Button>
                   </div>
                 </div>
-
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                   <div className="flex-1 p-2 bg-gray-50 rounded border text-sm text-gray-600 overflow-x-auto">
                     {`${window.location.origin}/${certificate.courseName
@@ -366,8 +412,8 @@ export default function CertificatePage({ params }: CertificatePageProps) {
           <div className="space-y-6">
             {/* Certificate Info */}
             <Card>
-              <CardContent className="p-6 pt-4">
-                <h3 className="text-lg font-semibold mb-2 flex items-center">
+              <CardContent className="p-6 pt-6">
+                <h3 className="text-lg font-semibold mb-5 flex items-center">
                   <Shield className="h-5 w-5 mr-2" />
                   Certificate Details
                 </h3>
@@ -381,15 +427,15 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                       <p className="text-sm text-gray-600">
                         {certificate.recipientName}
                       </p>
-                      {certificate.recipientEmail && (
+                      {/* {certificate.recipientEmail && (
                         <p className="text-xs text-gray-500">
                           {certificate.recipientEmail}
                         </p>
-                      )}
+                      )} */}
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <Calendar className="h-5 w-5 text-gray-400 mt-0.5" />
+                    <Calendar className="h-5 w-5 text-gray-400 mt-1" />
                     <div>
                       <p className="text-sm font-medium text-gray-900">
                         Completion Date
@@ -399,26 +445,16 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                       </p>
                     </div>
                   </div>
-                  {certificate.duration && (
-                    <div className="flex items-start space-x-3">
-                      <Award className="h-5 w-5 text-gray-400 mt-0.5" />
-                      <div>
-                        <p className="text-sm font-medium text-gray-900">
-                          Duration
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          {certificate.duration}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                  <h3 className="text-lg font-semibold mb-2 flex items-center">
+
+                  {/* <h3 className="text-lg font-semibold mb-2 flex items-center">
                     <Shield className="h-5 w-5 mr-2 text-green-600" />
                     Verification
-                  </h3>
-                  <div className="flex items-center space-x-2">
+                  </h3> */}
+                  <div className="flex items-center space-x-2 pt-[5px]">
                     <CheckCircle className="h-4 w-4 text-green-600" />
-                    <span className="text-sm text-gray-600">Verified</span>
+                    <span className="text-sm text-gray-600">
+                      Verified by Mailmodo
+                    </span>
                   </div>
                 </div>
               </CardContent>
@@ -426,8 +462,8 @@ export default function CertificatePage({ params }: CertificatePageProps) {
             {/* Skills Acquired */}
             {certificate.skills.length > 0 && (
               <Card>
-                <CardContent className="p-6 pt-2 ">
-                  <h3 className="text-lg font-semibold mb-2">
+                <CardContent className="p-6 pt-5 ">
+                  <h3 className="text-lg font-semibold mb-6">
                     Skills Acquired
                   </h3>
                   <div className="flex flex-wrap gap-2">
@@ -442,8 +478,8 @@ export default function CertificatePage({ params }: CertificatePageProps) {
             )}
             {certificate.courseName.toLowerCase().includes("email") && (
               <Card>
-                <CardContent className="p-6 pt-3">
-                  <h3 className="text-lg font-bold mb-3 text">
+                <CardContent className="p-6 pt-4">
+                  <h3 className="text-lg font-bold mb-4 text">
                     {/* Loved learning {certificate.courseName}? */}
                     Level Up Your Email Game
                   </h3>
@@ -469,12 +505,12 @@ export default function CertificatePage({ params }: CertificatePageProps) {
               .toLowerCase()
               .includes("deliverability") && (
               <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-bold mb-4">
+                <CardContent className="p-6 pt-3 mt-[1px]">
+                  <h3 className="text-lg font-bold mb-4 ">
                     {/* Loved learning {certificate.courseName}? */}
                     Go Beyond Deliverability
                   </h3>
-                  <p className="text-sm text-gray-700 mb-4">
+                  <p className="text-sm text-gray-700 mb-3">
                     {/* Explore our advanced courses on email copywriting,email
                     design,segmentation strategies,email deliverability */}
                     Master copy, design, and strategy too.

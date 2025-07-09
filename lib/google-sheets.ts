@@ -3,7 +3,7 @@ import type { Certificate } from "@/types/certificate";
 // Google Sheets configuration
 const SHEET_ID = process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID || "your-sheet-id";
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY || "your-api-key";
-const SHEET_NAME = "Certificates"; // Name of your sheet tab
+const SHEET_NAME = "Certificates DB"; // Name of your sheet tab
 
 interface SheetRow {
   [key: string]: string;
@@ -67,7 +67,7 @@ export async function getCertificateById(
   try {
     const sheetData = await fetchSheetData();
 
-    const row = sheetData.find((row) => row["Certificate ID"] === id);
+    const row = sheetData.find((row) => row.certificate_id === id);
 
     if (!row) {
       return null;
@@ -75,25 +75,23 @@ export async function getCertificateById(
 
     // Convert sheet row to Certificate object
     const certificate: Certificate = {
-      id: row["Certificate ID"],
-      recipientName: row["Recipient Name"],
-      recipientEmail: row["Recipient Email"],
-      courseName: row["Course Name"],
-      issuerName: row["Issuer Name"],
-      issueDate: row["Issue Date"],
-      completionDate: row["Completion Date"],
-      duration: row["Duration"],
-      templateurl: row["Certificate Url"],
-      grade: row["Grade"],
-      skills: row["Skills"]
-        ? row["Skills"].split(",").map((s) => s.trim())
-        : [],
-      instructorName: row["Instructor Name"],
-      verificationCode: row["Verification Code"],
-      isVerified: row["Is Verified"]?.toLowerCase() === "true",
+      id: row.certificate_id,
+      recipientName: row.recipient_name,
+      recipientEmail: row.recipient_email,
+      courseName: row.course_name,
+      issuerName: row.issuer_name,
+      issueDate: row.issue_date,
+      completionDate: row.completion_date,
+      duration: row.duration,
+      certificateUrl: row.certificate_url,
+      grade: row.grade,
+      skills: row.skills ? row.skills.split(",").map((s) => s.trim()) : [],
+      instructorName: row.instructor_name,
+      isVerified: row.is_verified?.toLowerCase() === "true",
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
+    console.log(certificate);
 
     return certificate;
   } catch (error) {
@@ -107,21 +105,19 @@ export async function getAllCertificates(): Promise<Certificate[]> {
     const sheetData = await fetchSheetData();
 
     return sheetData.map((row) => ({
-      id: row["Certificate ID"],
-      recipientName: row["Recipient Name"],
-      recipientEmail: row["Recipient Email"],
-      courseName: row["Course Name"],
-      issuerName: row["Issuer Name"],
-      issueDate: row["Issue Date"],
-      completionDate: row["Completion Date"],
-      duration: row["Duration"],
-      grade: row["Grade"],
-      skills: row["Skills"]
-        ? row["Skills"].split(",").map((s) => s.trim())
-        : [],
-      instructorName: row["Instructor Name"],
-      verificationCode: row["Verification Code"],
-      isVerified: row["Is Verified"]?.toLowerCase() === "true",
+      id: row.certificate_id,
+      recipientName: row.recipient_name,
+      recipientEmail: row.recipient_email,
+      courseName: row.course_name,
+      issuerName: row.issuer_name,
+      issueDate: row.issue_date,
+      completionDate: row.completion_date,
+      duration: row.duration,
+      certificateUrl: row.certificate_url,
+      grade: row.grade,
+      skills: row.skills ? row.skills.split(",").map((s) => s.trim()) : [],
+      instructorName: row.instructor_name,
+      isVerified: row.is_verified?.toLowerCase() === "true",
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }));
@@ -149,10 +145,10 @@ export async function validateSheetSetup(): Promise<{
 
     // Check if required columns exist
     const requiredColumns = [
-      "Certificate ID",
-      "Recipient Name",
-      "Course Name",
-      "Issuer Name",
+      "certificate_id",
+      "recipient_name",
+      "course_name",
+      "issuer_name",
     ];
 
     const firstRow = data[0];
