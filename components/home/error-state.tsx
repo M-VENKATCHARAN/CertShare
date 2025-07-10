@@ -14,9 +14,7 @@ export function ErrorState({ error }: ErrorStateProps) {
           Unable to load certificates
         </h3>
         <p className="text-red-700">{error}</p>
-        <p className="text-sm text-red-600 mt-2">
-          Please check your Google Sheets configuration or try again later.
-        </p>
+        <p className="text-sm text-red-600 mt-2">Please try again later.</p>
       </CardContent>
     </Card>
   );
