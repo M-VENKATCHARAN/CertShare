@@ -1,5 +1,28 @@
 import { getAllCertificates, validateSheetSetup } from "@/lib/google-sheets";
 import { HomeHeader, CertificatesSection, ErrorState } from "@/components/home";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Certificates",
+    description: "Certificates",
+    keywords: "Certificates",
+    alternates: {
+      canonical: "/",
+    },
+    robots: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
+    openGraph: {
+      type: "website",
+      url: "/",
+      title: "Certificates",
+      description: "Certificates",
+    },
+  };
+}
 
 async function getCertificatesData() {
   try {

@@ -22,6 +22,13 @@ export async function generateMetadata({ params }: CertificatePageProps) {
   return {
     title: `${certificate.recipientName} - ${certificate.courseName} Certificate`,
     description: `Certificate of completion for ${certificate.courseName} awarded to ${certificate.recipientName} by ${certificate.issuerName}`,
+    alternates: {
+      canonical: `/${certificate.spaceSlug}/certificate/${certificate.slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
     openGraph: {
       title: `${certificate.recipientName} - ${certificate.courseName} Certificate`,
       description: `Certificate of completion for ${certificate.courseName} awarded to ${certificate.recipientName} by ${certificate.issuerName}`,
@@ -83,6 +90,8 @@ export default async function CertificatePage({
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <h1 className="hidden">Certificate of Completion</h1>
+
           {/* Certificate Display */}
           <div className="lg:col-span-2">
             <CertificateDisplay certificate={certificate} />
