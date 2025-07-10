@@ -9,7 +9,7 @@ export function ErrorState({ error }: ErrorStateProps) {
   return (
     <Card className="border-red-200 bg-red-50">
       <CardContent className="p-8 text-center">
-        {/* <AlertTriangle className="h-12 w-12 text-red-500 mx-auto mb-4" /> */}
+        <AlertTriangle className="h-12 w-12 text-red-500 mx-auto mb-4" />
         <h3 className="text-lg font-medium text-red-900 mb-2">
           Unable to load certificates
         </h3>

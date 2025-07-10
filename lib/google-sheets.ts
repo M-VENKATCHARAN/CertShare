@@ -33,7 +33,9 @@ export async function fetchSheetData(): Promise<SheetRow[]> {
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch sheet data: ${response.statusText}`);
+      throw new Error(
+        `Failed to fetch certificate data: ${response.statusText}`
+      );
     }
 
     const data = await response.json();
