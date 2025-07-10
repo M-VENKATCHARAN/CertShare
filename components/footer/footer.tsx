@@ -271,7 +271,10 @@ export const Footer = () => {
             ["/gdpr/cookiepolicy/", "Cookie Policy"],
           ].map(([link, label]) => (
             <li key={link}>
-              <Link href={link} className={linkClass}>
+              <Link
+                href={`https://www.mailmodo.com${link}`}
+                className={linkClass}
+              >
                 {label}
               </Link>
             </li>
