@@ -238,7 +238,7 @@ export function ShareOptions({ certificate }: ShareOptionsProps) {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-          <div className="flex-1 p-2 bg-gray-50 rounded border text-sm text-gray-600 overflow-x-auto">
+          <div className="flex-1 p-2 bg-gray-50 rounded border text-xs text-gray-600 overflow-x-auto">
             {generateUrl()}
           </div>
           <Button

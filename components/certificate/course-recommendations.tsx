@@ -11,7 +11,7 @@ interface CourseRecommendationsProps {
 export function CourseRecommendations({
   certificate,
 }: CourseRecommendationsProps) {
-  const courseName = certificate.courseName.toLowerCase();
+  const courseName = certificate.spaceSlug.toLowerCase();
 
   if (courseName.includes("email")) {
     return (
@@ -38,7 +38,7 @@ export function CourseRecommendations({
   if (courseName.includes("deliverability")) {
     return (
       <Card>
-        <CardContent className="p-6 pt-3 mt-[1px]">
+        <CardContent className="p-6 pt-3 mt-[2px]">
           <h3 className="text-lg font-bold mb-4">Go Beyond Deliverability</h3>
           <p className="text-sm text-gray-700 mb-3">
             Master copy, design, and strategy too.
