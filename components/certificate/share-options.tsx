@@ -13,6 +13,7 @@ import {
   Link2,
 } from "lucide-react";
 import type { Certificate } from "@/types/certificate";
+import { usePathname } from "next/navigation";
 
 interface ShareOptionsProps {
   certificate: Certificate;
@@ -20,14 +21,10 @@ interface ShareOptionsProps {
 
 export function ShareOptions({ certificate }: ShareOptionsProps) {
   const [copied, setCopied] = useState(false);
+  const pathname = usePathname();
 
   const generateUrl = () => {
-    return `${window.location.origin}/${certificate.courseName
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, "-")}/certificate/${certificate.recipientName
-      .toLowerCase()
-      .replace(/\s+/g, "-")}-${certificate.id}`;
+    return `https://courses.mailmodo.com${pathname}`;
   };
 
   const handleShare = (platform: string) => {
