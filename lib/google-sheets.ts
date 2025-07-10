@@ -143,7 +143,7 @@ export async function validateSheetSetup(): Promise<{
     if (data.length === 0) {
       return {
         isValid: false,
-        error: "No data found in the sheet. Please add certificate data.",
+        error: "No certificate data found . Please add certificate data.",
       };
     }
 
