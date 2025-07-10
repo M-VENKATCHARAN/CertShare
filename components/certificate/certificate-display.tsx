@@ -15,7 +15,7 @@ export function CertificateDisplay({ certificate }: CertificateDisplayProps) {
           alt={`${certificate.courseName} Certificate for ${certificate.recipientName}`}
           height={100}
           width={620}
-          className="w-full h-auto"
+          className=" h-auto"
         />
       </div>
     </Card>
