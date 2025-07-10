@@ -67,7 +67,7 @@ export async function getCertificateById(
   try {
     const sheetData = await fetchSheetData();
 
-    const row = sheetData.find((row) => row.certificate_id === id);
+    const row = sheetData.find((row) => row.slug === id);
 
     if (!row) {
       return null;
@@ -76,6 +76,8 @@ export async function getCertificateById(
     // Convert sheet row to Certificate object
     const certificate: Certificate = {
       id: row.certificate_id,
+      slug: row.slug,
+      spaceSlug: row.space_slug,
       recipientName: row.recipient_name,
       recipientEmail: row.recipient_email,
       courseName: row.course_name,
@@ -106,6 +108,8 @@ export async function getAllCertificates(): Promise<Certificate[]> {
 
     return sheetData.map((row) => ({
       id: row.certificate_id,
+      slug: row.slug,
+      spaceSlug: row.space_slug,
       recipientName: row.recipient_name,
       recipientEmail: row.recipient_email,
       courseName: row.course_name,

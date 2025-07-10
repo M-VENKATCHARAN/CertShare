@@ -1,5 +1,7 @@
 export interface Certificate {
   id: string;
+  slug: string;
+  spaceSlug: string;
   recipientName: string;
   recipientEmail: string;
   courseName: string;

@@ -1,25 +1,27 @@
 import type { Certificate, CertificateTemplate } from "@/types/certificate";
 
-function generateCertificateId() {
-  return `CERT-${Date.now()}-${Math.random()
-    .toString(36)
-    .substr(2, 6)
-    .toUpperCase()}`;
-}
-
 function generateVerificationCode() {
   return `VER-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
 }
 
 function createCertificate(
-  recipient: { name: string; email: string; grade: string },
+  recipient: {
+    name: string;
+    email: string;
+    grade: string;
+    id: string;
+    slug: string;
+    spaceSlug: string;
+  },
   template: CertificateTemplate
 ): Certificate {
   const now = new Date();
   const completionDate = new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000); // 5 days ago
 
   return {
-    id: generateCertificateId(),
+    id: recipient.id,
+    slug: recipient.slug,
+    spaceSlug: recipient.spaceSlug,
     recipientName: recipient.name,
     recipientEmail: recipient.email,
     courseName: template.courseName,
