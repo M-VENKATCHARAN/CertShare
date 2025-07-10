@@ -8,7 +8,7 @@ interface CertificateDisplayProps {
 
 export function CertificateDisplay({ certificate }: CertificateDisplayProps) {
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden" data-certificate-display>
       <div className="flex justify-center items-center">
         <Image
           src={certificate.certificateUrl}

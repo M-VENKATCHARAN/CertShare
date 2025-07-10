@@ -15,12 +15,18 @@ import {
 import type { Certificate } from "@/types/certificate";
 import { usePathname } from "next/navigation";
 
+// Dynamic imports for client-side libraries
+const html2pdf = typeof window !== "undefined" ? require("html2pdf.js") : null;
+const html2canvas =
+  typeof window !== "undefined" ? require("html2canvas") : null;
+
 interface ShareOptionsProps {
   certificate: Certificate;
 }
 
 export function ShareOptions({ certificate }: ShareOptionsProps) {
   const [copied, setCopied] = useState(false);
+  const [downloading, setDownloading] = useState(false);
   const pathname = usePathname();
 
   const generateUrl = () => {
@@ -78,22 +84,93 @@ export function ShareOptions({ certificate }: ShareOptionsProps) {
   };
 
   const handleDownload = async (format: "pdf" | "png") => {
-    const url = certificate.certificateUrl;
-    if (!url) return;
+    setDownloading(true);
 
     try {
-      const response = await fetch(url);
-      const blob = await response.blob();
-      const downloadUrl = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = downloadUrl;
-      link.download = `${certificate.recipientName
+      const filename = `${certificate.recipientName
         .toLowerCase()
-        .replace(/\s+/g, "-")}-${certificate.spaceSlug}-certificate.${format}`;
-      link.click();
-      URL.revokeObjectURL(downloadUrl);
+        .replace(/\s+/g, "-")}-${certificate.spaceSlug}-certificate`;
+
+      // Find the certificate display element
+      const certificateElement: HTMLElement | null =
+        document.querySelector("[data-certificate-display]") ||
+        document.querySelector(".certificate-display") ||
+        document.querySelector('[data-testid="certificate-display"]');
+
+      if (!certificateElement) {
+        console.error("Certificate display element not found");
+        return;
+      }
+
+      if (format === "pdf") {
+        if (!html2pdf) {
+          console.error("html2pdf is not available");
+          return;
+        }
+
+        const elementWidth = certificateElement.scrollWidth;
+        const elementHeight = certificateElement.scrollHeight;
+
+        // Calculate optimal PDF dimensions (in mm)
+        const aspectRatio = elementWidth / elementHeight;
+        let pdfWidth, pdfHeight, orientation;
+
+        if (aspectRatio > 1) {
+          // Landscape orientation
+          orientation = "landscape";
+          pdfWidth = Math.max(210, elementWidth * 0.264583); // Convert px to mm
+          pdfHeight = pdfWidth / aspectRatio;
+        } else {
+          // Portrait orientation
+          orientation = "portrait";
+          pdfHeight = Math.max(297, elementHeight * 0.264583);
+          pdfWidth = pdfHeight * aspectRatio;
+        }
+
+        const options = {
+          margin: 0,
+          filename: `${filename}.pdf`,
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: {
+            scale: 1.5,
+            useCORS: true,
+            scrollX: 0,
+            scrollY: 0,
+            width: elementWidth,
+            height: elementHeight,
+          },
+          jsPDF: {
+            unit: "mm",
+            format: [pdfWidth, pdfHeight],
+            orientation: orientation,
+            compress: true,
+          },
+          pagebreak: { mode: ["avoid-all"] },
+        };
+
+        await html2pdf().set(options).from(certificateElement).save();
+      } else if (format === "png") {
+        if (!html2canvas) {
+          console.error("html2canvas is not available");
+          return;
+        }
+
+        const canvas = await html2canvas(certificateElement, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+        });
+
+        // Convert canvas to PNG and download
+        const link = document.createElement("a");
+        link.download = `${filename}.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      }
     } catch (error) {
       console.error(`Failed to download ${format.toUpperCase()}:`, error);
+    } finally {
+      setDownloading(false);
     }
   };
 
@@ -143,18 +220,20 @@ export function ShareOptions({ certificate }: ShareOptionsProps) {
               size="sm"
               className="flex items-center gap-2"
               onClick={() => handleDownload("pdf")}
+              disabled={downloading}
             >
               <Download className="h-4 w-4" />
-              Download PDF
+              {downloading ? "Downloading..." : "Download PDF"}
             </Button>
             <Button
               variant="outline"
               size="sm"
               className="flex items-center gap-2"
               onClick={() => handleDownload("png")}
+              disabled={downloading}
             >
               <Download className="h-4 w-4" />
-              Download PNG
+              {downloading ? "Downloading..." : "Download PNG"}
             </Button>
           </div>
         </div>
