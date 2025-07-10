@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: CertificatePageProps) {
     title: `${certificate.recipientName} - ${certificate.courseName} Certificate`,
     description: `Certificate of completion for ${certificate.courseName} awarded to ${certificate.recipientName} by ${certificate.issuerName}`,
     alternates: {
-      canonical: `/${certificate.spaceSlug}/certificate/${certificate.slug}`,
+      canonical: `/${certificate.spaceSlug}/certificate/${certificate.slug}/`,
     },
     robots: {
       index: true,
