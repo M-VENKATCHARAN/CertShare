@@ -49,18 +49,9 @@ export default function HomePage() {
       if (validation.isValid) {
         const certs = await getAllCertificates();
 
-        // Sort by completionDate in MM/DD/YYYY format (most recent first)
         const sortedCerts = certs.sort((a, b) => {
-          const parseDate = (dateStr: string) => {
-            const [month, day, year] = dateStr.split("/").map(Number);
-            return new Date(year, month - 1, day).getTime();
-          };
-
-          const dateA = parseDate(a.completionDate);
-          const dateB = parseDate(b.completionDate);
-          return dateB - dateA;
+          return Date.parse(b.completionDate) - Date.parse(a.completionDate);
         });
-
         setCertificates(sortedCerts);
       }
     } catch (error) {
@@ -192,6 +183,7 @@ export default function HomePage() {
                     <Button asChild className="w-full">
                       <Link
                         href={`${cert.courseName
+                          .trim()
                           .toLowerCase()
                           .replace(
                             /\s+/g,

@@ -71,6 +71,7 @@ export default function CertificatePage({ params }: CertificatePageProps) {
     if (!certificate) return;
 
     const url = `${window.location.origin}/${certificate.courseName
+      .trim()
       .toLowerCase()
       .replace(/\s+/g, "-")}/certificate/${certificate.recipientName
       .toLowerCase()
@@ -118,6 +119,7 @@ export default function CertificatePage({ params }: CertificatePageProps) {
 
     try {
       const url = `${window.location.origin}/${certificate.courseName
+        .trim()
         .toLowerCase()
         .replace(/\s+/g, "-")}/certificate/${certificate.recipientName
         .toLowerCase()
@@ -227,64 +229,11 @@ export default function CertificatePage({ params }: CertificatePageProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Header */}
-      {/* <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Award className="h-8 w-8 text-blue-600" />
-              <span className="text-2xl font-bold text-gray-900">CertShare</span>
-              <Badge variant="outline" className="ml-2 text-xs">
-                Powered by Google Sheets
-              </Badge>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleRefresh}
-                disabled={refreshing}
-                className="bg-transparent"
-              >
-                {refreshing ? (
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-600"></div>
-                ) : (
-                  <RefreshCw className="h-4 w-4" />
-                )}
-              </Button>
-              <Badge variant="secondary" className="bg-green-100 text-green-800">
-                <CheckCircle className="h-4 w-4 mr-1" />
-                {certificate.isVerified ? "Verified" : "Pending"}
-              </Badge>
-            </div>
-          </div>
-        </div>
-      </header> */}
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Certificate Display */}
           <div className="lg:col-span-2">
             <Card className="overflow-hidden">
-              {/* <div
-                className="p-8 text-white bg-contain bg-center bg-no-repeat  sm:h-[440px]" // className="p-8 text-white bg-cover bg-center bg-no-repeat"
-                style={{
-                  backgroundImage: `url('${certificate.templateurl}')`,
-                }}
-                // className="bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-white"
-              >
-                <div className="text-center space-y-4">
-                  <p className="text-xl opacity-90 text-black">
-                    This certifies that
-                  </p> */}
-              {/* <h2 className="text-xl font-bold text-black ml-[20px] mt-[140px]">
-                    {certificate.recipientName}
-                  </h2> */}
-              {/* <h2 className="sm:text-xl   font-bold text-black ml-[40px] mt-[150px] sm:ml-[20px] sm:mt-[140px]">
-                    {certificate.recipientName}
-                  </h2>
-                </div>
-              </div> */}
               <div
                 className="flex justify-center items-center"
                 // className="h-[260px] sm:h-[440px] bg-contain bg-center bg-no-repeat relative flex items-start justify-start sm:items-start sm:justify-start"
@@ -387,6 +336,7 @@ export default function CertificatePage({ params }: CertificatePageProps) {
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                   <div className="flex-1 p-2 bg-gray-50 rounded border text-sm text-gray-600 overflow-x-auto">
                     {`${window.location.origin}/${certificate.courseName
+                      .trim()
                       .toLowerCase()
                       .replace(
                         /\s+/g,
