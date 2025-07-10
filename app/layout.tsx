@@ -9,9 +9,9 @@ import { Footer } from "../components/footer/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Certificate Hosting Platform",
-  description: "Host and share your course completion certificates",
-  generator: "v0.dev",
+  title: "Mailmodo Achievers | Find & Share Your Course Certificates Easily",
+  description:
+    "Find your Mailmodo certificates on Achievers. Download, verify, and share them to showcase your email marketing skills.",
 };
 
 export default function RootLayout({

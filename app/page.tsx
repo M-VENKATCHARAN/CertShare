@@ -4,8 +4,9 @@ import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Certificates",
-    description: "Certificates",
+    title: "Mailmodo Achievers | Find & Share Your Course Certificates Easily",
+    description:
+      "Find your Mailmodo certificates on Achievers. Download, verify, and share them to showcase your email marketing skills.",
     keywords: "Certificates",
     alternates: {
       canonical: "/",
@@ -18,8 +19,10 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: "website",
       url: "/",
-      title: "Certificates",
-      description: "Certificates",
+      title:
+        "Mailmodo Achievers | Find & Share Your Course Certificates Easily",
+      description:
+        "Find your Mailmodo certificates on Achievers. Download, verify, and share them to showcase your email marketing skills.",
     },
   };
 }
