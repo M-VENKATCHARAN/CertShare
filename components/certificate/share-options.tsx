@@ -87,7 +87,9 @@ export function ShareOptions({ certificate }: ShareOptionsProps) {
       const downloadUrl = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = downloadUrl;
-      link.download = `certificate.${format}`;
+      link.download = `${certificate.recipientName
+        .toLowerCase()
+        .replace(/\s+/g, "-")}-${certificate.spaceSlug}-certificate.${format}`;
       link.click();
       URL.revokeObjectURL(downloadUrl);
     } catch (error) {
