@@ -34,7 +34,7 @@ export async function fetchSheetData(): Promise<SheetRow[]> {
 
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch certificate data: ${response.statusText}`
+        `Failed to retrieve certificate data: ${response.statusText}. Please check the API endpoint or network connection.`
       );
     }
 
@@ -58,7 +58,7 @@ export async function fetchSheetData(): Promise<SheetRow[]> {
       return obj;
     });
   } catch (error) {
-    console.error("Error fetching Google Sheets data:", error);
+    console.error("Error fetching Certificate data:", error);
     return [];
   }
 }
@@ -145,7 +145,8 @@ export async function validateSheetSetup(): Promise<{
     if (data.length === 0) {
       return {
         isValid: false,
-        error: "No certificate data found . Please add certificate data.",
+        error:
+          "Certificate data is missing or empty. Please ensure that certificate data is provided.",
       };
     }
 
