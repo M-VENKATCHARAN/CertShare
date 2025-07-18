@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "Mailmodo Achievers | Find & Share Your Course Certificates Easily",
   description:
     "Find your Mailmodo certificates on Achievers. Download, verify, and share them to showcase your email marketing skills.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
