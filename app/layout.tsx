@@ -14,9 +14,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
-  alternates: {
-    canonical: "https://courses.mailmodo.com",
-  },
+  // alternates: {
+  //   canonical: "https://courses.mailmodo.com",
+  // },
 };
 
 export default function RootLayout({

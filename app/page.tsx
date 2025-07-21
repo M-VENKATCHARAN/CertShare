@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
       "Find your Mailmodo certificates on Achievers. Download, verify, and share them to showcase your email marketing skills.",
     keywords: "Certificates",
     alternates: {
-      canonical: "/",
+      canonical: "https://courses.mailmodo.com",
     },
     robots: {
       index: true,
