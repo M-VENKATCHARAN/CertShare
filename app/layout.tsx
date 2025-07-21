@@ -5,15 +5,17 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Header } from "../components/header/header";
 import { Footer } from "../components/footer/footer";
-
+import { GoogleAnalytics } from "@next/third-parties/google";
 const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
   title: "Mailmodo Achievers | Find & Share Your Course Certificates Easily",
   description:
     "Find your Mailmodo certificates on Achievers. Download, verify, and share them to showcase your email marketing skills.",
   icons: {
     icon: "/favicon.ico",
+  },
+  alternates: {
+    canonical: "https://courses.mailmodo.com",
   },
 };
 
@@ -31,6 +33,7 @@ export default function RootLayout({
         <Toaster />
         <Footer />
       </body>
+      <GoogleAnalytics gaId="G-XYZ" />
     </html>
   );
 }
