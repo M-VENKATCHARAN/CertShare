@@ -32,7 +32,11 @@ export const Header = () => {
   return (
     <div className="px-1 sm:px-6 lg:px-8 py-3 flex justify-between items-center bg-[#ebf2ff]">
       {/* Logo max-w-7xl mx-auto*/}
-      <Link href="/" prefetch={false} className="ml-[20px] sm:ml-[100px]">
+      <Link
+        href="https://www.mailmodo.com/"
+        prefetch={false}
+        className="ml-[20px] sm:ml-[100px]"
+      >
         <Image
           src={LogoFull}
           alt="header-logo"
