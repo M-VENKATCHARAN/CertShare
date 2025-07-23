@@ -13,7 +13,7 @@ interface SearchBarProps {
 export function SearchBar({ searchTerm, onSearchChange }: SearchBarProps) {
   return (
     <Card className="mb-8">
-      <CardContent className="p-6">
+      <CardContent className="p-2">
         <div className="flex items-center space-x-2">
           <Search className="h-5 w-5 text-gray-400" />
           <div className="flex-1">

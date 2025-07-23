@@ -25,7 +25,7 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
               {certificate.recipientName}
             </CardTitle>
             <CardDescription className="mt-1">
-              {certificate.issuerName}
+              {/* {certificate.issuerName} */}
             </CardDescription>
           </div>
           <Badge
